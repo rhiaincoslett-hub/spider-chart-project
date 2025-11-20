@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Client Capability Radar</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app">
+      <section class="chart-panel">
+        <canvas id="radarCanvas" width="820" height="820" aria-label="Capability radar chart"></canvas>
+      </section>
+      <section class="control-panel">
+        <h1>Client Readiness Radar</h1>
+        <p class="lead">
+          Adjust the spider graph per client, then download or print for your deck.
+        </p>
+        <div class="control-group">
+          <label for="dimensionSelect">Dimension</label>
+          <select id="dimensionSelect"></select>
+        </div>
+        <div class="control-group range-group">
+          <label for="valueSlider">
+            Score: <span id="valueDisplay">0</span>
+          </label>
+          <input
+            id="valueSlider"
+            type="range"
+            min="0"
+            max="4"
+            step="0.1"
+            value="0"
+          />
+        </div>
+        <div class="button-row">
+          <button id="downloadBtn" type="button">Download PNG</button>
+          <button id="printBtn" type="button">Print</button>
+        </div>
+      </section>
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>
+

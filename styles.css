@@ -1,0 +1,138 @@
+:root {
+  font-family: "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #0e1c1f;
+  background-color: #f7f4ef;
+  line-height: 1.4;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(circle at top right, #ffffff, #f7f4ef 60%);
+}
+
+.app {
+  width: min(1200px, 95vw);
+  display: grid;
+  grid-template-columns: 1.4fr 0.8fr;
+  gap: 2rem;
+  padding: 2.5rem;
+  background-color: #fffefa;
+  border-radius: 28px;
+  box-shadow: 0 24px 60px rgba(11, 33, 43, 0.12);
+}
+
+.chart-panel,
+.control-panel {
+  background-color: #fff;
+  border-radius: 24px;
+  padding: 1.5rem;
+  box-shadow: inset 0 0 0 1px rgba(12, 35, 42, 0.05);
+}
+
+.chart-panel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+canvas {
+  max-width: 100%;
+  height: auto;
+}
+
+.control-panel h1 {
+  margin: 0;
+  font-size: 1.9rem;
+  letter-spacing: 0.01em;
+}
+
+.lead {
+  color: #5b6468;
+  margin: 0.75rem 0 1.5rem;
+}
+
+.control-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  gap: 0.35rem;
+}
+
+label {
+  font-weight: 600;
+  color: #162930;
+}
+
+select,
+input[type="range"],
+button {
+  font: inherit;
+}
+
+select {
+  padding: 0.65rem 0.85rem;
+  border-radius: 14px;
+  border: 1px solid rgba(12, 35, 42, 0.2);
+  background-color: #fff;
+}
+
+input[type="range"] {
+  width: 100%;
+}
+
+.range-group label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.button-row {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+button {
+  flex: 1;
+  border: none;
+  border-radius: 20px;
+  padding: 0.85rem 1rem;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  transition: transform 160ms ease, box-shadow 160ms ease;
+  background: linear-gradient(135deg, #154a3f, #2ab28a);
+  box-shadow: 0 10px 20px rgba(13, 56, 44, 0.2);
+}
+
+button:nth-child(2) {
+  background: linear-gradient(135deg, #4b2c75, #c067ff);
+  box-shadow: 0 10px 20px rgba(75, 44, 117, 0.25);
+}
+
+button:hover {
+  transform: translateY(-2px);
+}
+
+@media (max-width: 960px) {
+  .app {
+    grid-template-columns: 1fr;
+    padding: 1.5rem;
+  }
+
+  .chart-panel,
+  .control-panel {
+    padding: 1.25rem;
+  }
+}
+
