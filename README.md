@@ -2,14 +2,6 @@
 
 Lightweight, front-end only visualization that blends a spider chart with a segmented capability ring. Use it as a selling aid to quickly show where a client is strong or needs support across eight dimensions.
 
-## Run locally
-
-```bash
-cd /Users/rhiaincoslett/Desktop/spider-chart-project
-python3 -m http.server 8080
-```
-
-Visit http://localhost:8080 in your browser. Any static file server (VS Code Live Server, `npx serve`, etc.) works as well.
 
 ## Customize the chart
 
