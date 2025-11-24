@@ -59,7 +59,7 @@ function initControls() {
 
   selectEl.addEventListener("change", () => handleSelectionChange());
   sliderEl.addEventListener("input", (event) => handleSliderInput(event));
-  downloadBtn.addEventListener("click", handleDownload);
+  downloadBtn.addEventListener("click", () => handleDownload());
   printBtn.addEventListener("click", handlePrint);
 
   selectEl.value = "0";
@@ -200,25 +200,25 @@ function drawLabels() {
   ctx.font = "17px 'Inter', sans-serif";
   ctx.fillStyle = "#0d1e24";
 
-  const labelRadius = ringOuterRadius + 28;
+  const labelRadius = ringOuterRadius + 32;
 
   segments.forEach((segment, i) => {
-    const midAngle = -90 * RAD + i * arcSize + arcSize / 2;
-    const angleDeg = ((midAngle / RAD) + 360) % 360;
-    const x = Math.cos(midAngle) * labelRadius;
-    const y = Math.sin(midAngle) * labelRadius;
+    const lineAngle = -90 * RAD + i * arcSize;
+    const angleDeg = ((lineAngle / RAD) + 360) % 360;
+    const x = Math.cos(lineAngle) * labelRadius;
+    const y = Math.sin(lineAngle) * labelRadius;
 
     let align = "center";
-    if (angleDeg > 100 && angleDeg < 260) {
+    if (angleDeg > 90 && angleDeg < 270) {
       align = "right";
-    } else if (angleDeg < 80 || angleDeg > 280) {
+    } else if (angleDeg < 90 || angleDeg > 270) {
       align = "left";
     }
 
     let baseline = "middle";
-    if (angleDeg >= 30 && angleDeg <= 150) {
+    if (angleDeg > 0 && angleDeg < 180) {
       baseline = "bottom";
-    } else if (angleDeg >= 210 && angleDeg <= 330) {
+    } else if (angleDeg > 180 && angleDeg < 360) {
       baseline = "top";
     }
 
@@ -228,11 +228,59 @@ function drawLabels() {
   });
 }
 
-function handleDownload() {
+async function handleDownload() {
+  const canUsePicker =
+    typeof window.showSaveFilePicker === "function" && window.isSecureContext;
+
+  if (!canUsePicker) {
+    triggerFallbackDownload();
+    return;
+  }
+
+  try {
+    const blob = await canvasToBlob(canvas);
+    const handle = await window.showSaveFilePicker({
+      suggestedName: "client-readiness-radar.png",
+      types: [
+        {
+          description: "PNG Image",
+          accept: { "image/png": [".png"] },
+        },
+      ],
+    });
+    const writable = await handle.createWritable();
+    await writable.write(blob);
+    await writable.close();
+  } catch (error) {
+    if (error?.name === "AbortError") {
+      return;
+    }
+    console.error("Saving failed", error);
+    triggerFallbackDownload();
+  }
+}
+
+function triggerFallbackDownload() {
   const link = document.createElement("a");
   link.download = "client-readiness-radar.png";
   link.href = canvas.toDataURL("image/png", 1.0);
   link.click();
+}
+
+function canvasToBlob(canvasEl) {
+  return new Promise((resolve, reject) => {
+    canvasEl.toBlob(
+      (blob) => {
+        if (blob) {
+          resolve(blob);
+        } else {
+          reject(new Error("Unable to export canvas to Blob."));
+        }
+      },
+      "image/png",
+      1.0
+    );
+  });
 }
 
 function handlePrint() {
