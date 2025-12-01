@@ -7,35 +7,150 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <main class="app">
-      <section class="chart-panel">
-        <canvas id="radarCanvas" width="820" height="820" aria-label="Capability radar chart"></canvas>
-      </section>
-      <section class="control-panel">
+    <header class="hero">
+      <div>
         <h1>Client Readiness Radar</h1>
-        <p class="lead">
-          Adjust the spider graph per client, then download or print for your deck.
-        </p>
-        <div class="control-group">
-          <label for="dimensionSelect">Dimension</label>
-          <select id="dimensionSelect"></select>
+        <p>Switch between chart modes, tune labels, and export in seconds.</p>
+      </div>
+      <nav class="hero__nav">
+        <button class="nav-btn active" data-target="singlePage">Single Radar</button>
+        <button class="nav-btn" data-target="customPage">Custom Radar</button>
+        <button class="nav-btn" data-target="dualPage">Dual Radar</button>
+      </nav>
+    </header>
+    <main class="pages">
+      <section id="singlePage" class="page page--active">
+        <div class="app">
+          <section class="chart-panel">
+            <canvas
+              id="singleRadar"
+              width="820"
+              height="820"
+              aria-label="Single capability radar chart"
+            ></canvas>
+          </section>
+          <section class="control-panel">
+            <h2>Single Radar</h2>
+            <p class="lead">
+              Adjust scores and labels for one data set, then download or print.
+            </p>
+            <div class="control-group">
+              <label for="singleDimensionSelect">Dimension</label>
+              <select id="singleDimensionSelect"></select>
+            </div>
+            <div class="control-group range-group">
+              <label for="singleValueSlider">
+                Score: <span id="singleValueDisplay">0</span>
+              </label>
+              <input
+                id="singleValueSlider"
+                type="range"
+                min="0"
+                max="5"
+                step="0.1"
+                value="0"
+              />
+            </div>
+            <div class="button-row">
+              <button id="singleDownloadBtn" type="button">Download PNG</button>
+              <button id="singlePrintBtn" type="button">Print</button>
+            </div>
+          </section>
         </div>
-        <div class="control-group range-group">
-          <label for="valueSlider">
-            Score: <span id="valueDisplay">0</span>
-          </label>
-          <input
-            id="valueSlider"
-            type="range"
-            min="0"
-            max="4"
-            step="0.1"
-            value="0"
-          />
+      </section>
+
+      <section id="customPage" class="page">
+        <div class="app">
+          <section class="chart-panel">
+            <canvas
+              id="customRadar"
+              width="820"
+              height="820"
+              aria-label="Custom capability radar chart"
+            ></canvas>
+          </section>
+          <section class="control-panel">
+            <h2>Custom Radar</h2>
+            <p class="lead">
+              Rename every axis label and tweak scores for a bespoke view.
+            </p>
+            <div class="control-group">
+              <label for="customDimensionSelect">Dimension</label>
+              <select id="customDimensionSelect"></select>
+            </div>
+            <div class="control-group range-group">
+              <label for="customValueSlider">
+                Score: <span id="customValueDisplay">0</span>
+              </label>
+              <input
+                id="customValueSlider"
+                type="range"
+                min="0"
+                max="5"
+                step="0.1"
+                value="0"
+              />
+            </div>
+            <div class="control-group">
+              <p class="hint">Update the labels below to match your framework.</p>
+              <div id="customLabelEditor" class="label-editor"></div>
+            </div>
+            <div class="button-row">
+              <button id="customDownloadBtn" type="button">Download PNG</button>
+              <button id="customPrintBtn" type="button">Print</button>
+            </div>
+          </section>
         </div>
-        <div class="button-row">
-          <button id="downloadBtn" type="button">Download PNG</button>
-          <button id="printBtn" type="button">Print</button>
+      </section>
+
+      <section id="dualPage" class="page">
+        <div class="app">
+          <section class="chart-panel">
+            <canvas
+              id="dualRadar"
+              width="820"
+              height="820"
+              aria-label="Dual capability radar chart"
+            ></canvas>
+          </section>
+          <section class="control-panel">
+            <h2>Dual Radar</h2>
+            <p class="lead">
+              Compare two scenarios (e.g., Current vs Target) with custom labels.
+            </p>
+            <div class="control-group">
+              <label for="dualDatasetSelect">Dataset</label>
+              <select id="dualDatasetSelect">
+                <option value="current">Dataset A</option>
+                <option value="target">Dataset B</option>
+              </select>
+            </div>
+            <div class="control-group">
+              <label for="dualDimensionSelect">Dimension</label>
+              <select id="dualDimensionSelect"></select>
+            </div>
+            <div class="control-group range-group">
+              <label for="dualValueSlider">
+                Score: <span id="dualValueDisplay">0</span>
+              </label>
+              <input
+                id="dualValueSlider"
+                type="range"
+                min="0"
+                max="5"
+                step="0.1"
+                value="0"
+              />
+            </div>
+            <div class="control-group">
+              <p class="hint">Rename wedges to tailor this comparison view.</p>
+              <div id="dualLabelEditor" class="label-editor"></div>
+            </div>
+            <div class="button-row">
+              <button id="dualDownloadBtn" type="button">Download PNG</button>
+              <button id="dualPrintBtn" type="button">Print</button>
+            </div>
+          </section>
         </div>
       </section>
     </main>

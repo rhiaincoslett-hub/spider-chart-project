@@ -15,9 +15,77 @@ body {
   margin: 0;
   min-height: 100vh;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
+  gap: 2rem;
+  padding: 2rem 0 3rem;
   background: radial-gradient(circle at top right, #ffffff, #f7f4ef 60%);
+}
+
+.hero {
+  width: min(1200px, 95vw);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1rem;
+  padding: 1.5rem 2rem;
+  background-color: #fffefa;
+  border-radius: 24px;
+  box-shadow: 0 16px 40px rgba(11, 33, 43, 0.12);
+}
+
+.hero h1 {
+  margin: 0;
+  font-size: 2.25rem;
+}
+
+.hero p {
+  margin: 0.35rem 0 0;
+  color: #4a5357;
+}
+
+.hero__nav {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.nav-btn {
+  border: none;
+  border-radius: 999px;
+  padding: 0.65rem 1.4rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  background: #edf1f7;
+  color: #1b2a32;
+  transition: background 160ms ease, color 160ms ease, transform 160ms ease;
+}
+
+.nav-btn.active {
+  background: linear-gradient(135deg, #154a3f, #2ab28a);
+  color: #fff;
+  box-shadow: 0 10px 20px rgba(13, 56, 44, 0.2);
+}
+
+.nav-btn:hover {
+  transform: translateY(-1px);
+}
+
+.pages {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.page {
+  width: min(1200px, 95vw);
+  display: none;
+}
+
+.page--active {
+  display: block;
 }
 
 .app {
@@ -59,6 +127,12 @@ canvas {
 .lead {
   color: #5b6468;
   margin: 0.75rem 0 1.5rem;
+}
+
+.hint {
+  margin: 0 0 0.5rem;
+  color: #6c767c;
+  font-size: 0.9rem;
 }
 
 .control-group {
@@ -124,7 +198,37 @@ button:hover {
   transform: translateY(-2px);
 }
 
+.label-editor {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.5rem;
+}
+
+.label-editor__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.label-editor__field label {
+  font-size: 0.8rem;
+  color: #546068;
+}
+
+.label-editor__field input {
+  width: 100%;
+  padding: 0.5rem 0.65rem;
+  border-radius: 12px;
+  border: 1px solid rgba(12, 35, 42, 0.18);
+  background-color: #fff;
+}
+
 @media (max-width: 960px) {
+  .hero {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
   .app {
     grid-template-columns: 1fr;
     padding: 1.5rem;
