@@ -237,6 +237,34 @@ function createDualChart() {
       { scores: state.datasets.current.scores, style: datasetStyles.dualA },
       { scores: state.datasets.target.scores, style: datasetStyles.dualB },
     ]);
+    drawLegend(ctx);
+  }
+
+  function drawLegend(ctx) {
+    const { canvas } = ctx;
+    const legendY = canvas.height / 2 + geometry.ringOuterRadius + 60;
+    const legendX = canvas.width / 2;
+    const itemSpacing = 120;
+    const boxSize = 16;
+    const boxOffset = 8;
+
+    ctx.font = "16px 'Inter', sans-serif";
+    ctx.textAlign = "left";
+    ctx.textBaseline = "middle";
+
+    // Current (green)
+    const currentX = legendX - itemSpacing / 2;
+    ctx.fillStyle = datasetStyles.dualA.stroke;
+    ctx.fillRect(currentX - boxOffset - boxSize, legendY - boxSize / 2, boxSize, boxSize);
+    ctx.fillStyle = "#0d1e24";
+    ctx.fillText("Current", currentX + boxOffset, legendY);
+
+    // Check-in (orange)
+    const checkinX = legendX + itemSpacing / 2;
+    ctx.fillStyle = datasetStyles.dualB.stroke;
+    ctx.fillRect(checkinX - boxOffset - boxSize, legendY - boxSize / 2, boxSize, boxSize);
+    ctx.fillStyle = "#0d1e24";
+    ctx.fillText("Check-in", checkinX + boxOffset, legendY);
   }
 }
 
